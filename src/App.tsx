@@ -1,7 +1,12 @@
 import React from "react";
+import SearchResult from "./pages/searchResult/searchResult";
 
 function App() {
-  return <>이거다아</>;
+  return (
+    <>
+      <SearchResult />
+    </>
+  );
 }
 
 export default App;
