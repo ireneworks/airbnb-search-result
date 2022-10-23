@@ -25,6 +25,10 @@ export default function Navigation() {
 }
 
 const NavigationWrapper = styled.nav<{ isOpen: boolean }>`
+  @media screen and (min-width: 746px) {
+    display: none;
+  }
+
   ${(props) => {
     if (!props.isOpen) {
       return css`
@@ -53,6 +57,7 @@ const NavigationWrapper = styled.nav<{ isOpen: boolean }>`
       flex-direction: column;
       align-items: center;
       width: 70px;
+      cursor: pointer;
 
       span {
         font-size: 11px;
