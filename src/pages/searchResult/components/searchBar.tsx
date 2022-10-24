@@ -18,9 +18,7 @@ export default function SearchBar() {
       {isNarrowDesktop && (
         <DesktopWrapper>
           <div>
-            <LogoWrapper href="#">
-              <div />
-            </LogoWrapper>
+            <LogoWrapper href="#" />
             <SearchBarDesktop>
               <div>
                 <span>강남구</span>
@@ -32,9 +30,7 @@ export default function SearchBar() {
           </div>
           <div>
             <HostButton>호스트 되기</HostButton>
-            <GlobeIcon>
-              <div />
-            </GlobeIcon>
+            <GlobeIcon />
             <HamburgerMenu>
               <MenuIconWrapper />
               <UserIconWrapper />
@@ -60,7 +56,7 @@ export default function SearchBar() {
   );
 }
 
-const HostButton = styled.span`
+const HostButton = styled.a`
   font-size: 14px;
   font-weight: 600;
   cursor: pointer;
@@ -79,7 +75,7 @@ const HamburgerMenu = styled.div`
   border: 1px solid #dddddd;
 `;
 
-const UserIconWrapper = styled.div`
+const UserIconWrapper = styled.a`
   margin-left: 12px;
   width: 32px;
   height: 32px;
@@ -90,7 +86,7 @@ const UserIconWrapper = styled.div`
   cursor: pointer;
 `;
 
-const MenuIconWrapper = styled.div`
+const MenuIconWrapper = styled.button`
   margin-left: 8px;
   width: 20px;
   height: 20px;
@@ -99,6 +95,7 @@ const MenuIconWrapper = styled.div`
   background-size: contain;
   background-repeat: no-repeat;
   cursor: pointer;
+  border: none;
 `;
 
 const GlobeIcon = styled.button`
@@ -112,19 +109,14 @@ const GlobeIcon = styled.button`
   height: 40px;
   border-radius: 60px;
   border: none;
-  background: none;
+  background-size: 20px;
+  background-image: url(${Globe});
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: transparent;
 
   :hover {
     background-color: #ebebeb;
-  }
-
-  div {
-    width: 20px;
-    height: 20px;
-    background-image: url(${Globe});
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-color: transparent;
   }
 `;
 
@@ -224,14 +216,13 @@ const SearchBarDesktopIcon = styled.div`
 `;
 
 const LogoWrapper = styled.a`
-  div {
-    width: 40px;
-    height: 40px;
-    background-color: transparent;
-    background-image: url(${Logo});
-    background-size: contain;
-    background-repeat: no-repeat;
-  }
+  width: 40px;
+  height: 40px;
+  background-size: 40px;
+  background-color: transparent;
+  background-image: url(${Logo});
+  background-position: center;
+  background-repeat: no-repeat;
 `;
 
 const TouchAreaWrapper = styled.a`

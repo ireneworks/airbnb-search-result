@@ -7,6 +7,7 @@ import MapIcon from "./assets/bxs-map-alt.svg";
 import { useState } from "react";
 import { useMediaQuery } from "react-responsive";
 import { DESKTOP, NARROW_DESKTOP } from "./styles/devices";
+import ListIcon from "./assets/bx-list-ul.svg";
 
 export default function SearchResult() {
   const [contentOpen, setContentOpen] = useState(true);
@@ -16,10 +17,13 @@ export default function SearchResult() {
   const isDesktop = useMediaQuery({ query: `(min-width: ${DESKTOP})` });
 
   return (
-    <>
+    <Container>
       <SearchBar />
       {isNarrowDesktop && !isDesktop && (
-        <SwitchButton onClick={() => setContentOpen(!contentOpen)}>
+        <SwitchButton
+          contentOpen={contentOpen}
+          onClick={() => setContentOpen(!contentOpen)}
+        >
           <span>{contentOpen ? "지도 표시하기" : "목록 보기"}</span>
           <div />
         </SwitchButton>
@@ -27,18 +31,25 @@ export default function SearchResult() {
       <ContentList isOpen={contentOpen} />
       <KakaoMap isContentOpen={contentOpen} />
       <Navigation />
-    </>
+    </Container>
   );
 }
 
-const SwitchButton = styled.button`
+const Container = styled.main`
+  position: relative;
+  display: flex;
+  justify-content: center;
+`;
+
+const SwitchButton = styled.button<{ contentOpen: boolean }>`
   display: flex;
   justify-content: center;
   align-items: center;
   position: fixed;
   bottom: 25px;
-  width: 150px;
+  width: auto;
   height: 45px;
+  padding: 0 20px;
   background: #111111;
   border: none;
   border-radius: 50px;
@@ -56,7 +67,8 @@ const SwitchButton = styled.button`
     width: 20px;
     height: 20px;
     background-color: transparent;
-    background-image: url(${MapIcon});
+    background-image: url(${(props) =>
+      props.contentOpen ? MapIcon : ListIcon});
     background-size: contain;
     background-repeat: no-repeat;
   }

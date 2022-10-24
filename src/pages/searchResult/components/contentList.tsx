@@ -314,7 +314,6 @@ const TopWrapper = styled.div<{ scroll: boolean }>`
 
   p {
     margin: 0;
-    display: inline-block;
     font-size: 14px;
     font-weight: 600;
     color: #111111;
