@@ -6,291 +6,263 @@ import SearchIcon from "../assets/bx-search-white.svg";
 import Globe from "../assets/bx-globe.svg";
 import MenuIcon from "../assets/bx-menu.svg";
 import UserIcon from "../assets/bxs-user-circle.svg";
-import { useMediaQuery } from "react-responsive";
-import { MOBILE, NARROW_DESKTOP } from "../styles/devices";
+import { NARROW_DESKTOP } from "../styles/devices";
 
 export default function SearchBar() {
-  const isMobile = useMediaQuery({ query: "(max-width: 745px)" });
-  const isNarrowDesktop = useMediaQuery({ query: "(min-width:  746px)" });
-
   return (
     <SearchBarWrapper>
-      {isNarrowDesktop && (
-        <DesktopWrapper>
-          <div>
-            <LogoWrapper href="#" />
-            <SearchBarDesktop>
-              <div>
-                <span>강남구</span>
-                <span>11월 9일~12일</span>
-                <span>게스트 추가</span>
-              </div>
-              <SearchBarDesktopIcon />
-            </SearchBarDesktop>
+      <MobileWrapper>
+        <div className="left-side">
+          <button className="back-button" />
+          <button className="search-button">
+            <span className="location">강남</span>
+            <span className="sub-content">11월 9일~12일 · 게스트 추가</span>
+          </button>
+        </div>
+        <button className="filter-button" />
+      </MobileWrapper>
+      <DesktopWrapper>
+        <div>
+          <button className="logo-wrapper" />
+          <button className="desktop-search-bar-wrapper">
+            <div>
+              <span>강남구</span>
+              <span>11월 9일~12일</span>
+              <span>게스트 추가</span>
+            </div>
+            <div className="search-button" />
+          </button>
+        </div>
+        <div>
+          <a className="host-button" href="#">
+            호스트 되기
+          </a>
+          <button className="globe-button" />
+          <div className="hamburger-wrapper">
+            <button className="menu-icon-button" />
+            <button className="user-icon-button" />
           </div>
-          <div>
-            <HostButton>호스트 되기</HostButton>
-            <GlobeIcon />
-            <HamburgerMenu>
-              <MenuIconWrapper />
-              <UserIconWrapper />
-            </HamburgerMenu>
-          </div>
-        </DesktopWrapper>
-      )}
-      {isMobile && (
-        <TouchAreaWrapper>
-          <LeftSide>
-            <button />
-            <SearchContent>
-              <LocationLabel>강남</LocationLabel>
-              <span>11월 9일~12일 · 게스트 추가</span>
-            </SearchContent>
-          </LeftSide>
-          <FilterButton>
-            <div />
-          </FilterButton>
-        </TouchAreaWrapper>
-      )}
+        </div>
+      </DesktopWrapper>
     </SearchBarWrapper>
   );
 }
 
-const HostButton = styled.a`
-  font-size: 14px;
-  font-weight: 600;
-  cursor: pointer;
-  padding: 10px;
-  border-radius: 40px;
-  background: none;
-
-  :hover {
-    background: #ebebeb;
-  }
-`;
-
-const HamburgerMenu = styled.div`
-  padding: 4px;
-  border-radius: 24px;
-  border: 1px solid #dddddd;
-`;
-
-const UserIconWrapper = styled.a`
-  margin-left: 12px;
-  width: 32px;
-  height: 32px;
-  background-color: transparent;
-  background-image: url(${UserIcon});
-  background-size: contain;
-  background-repeat: no-repeat;
-  cursor: pointer;
-`;
-
-const MenuIconWrapper = styled.button`
-  margin-left: 8px;
-  width: 20px;
-  height: 20px;
-  background-color: transparent;
-  background-image: url(${MenuIcon});
-  background-size: contain;
-  background-repeat: no-repeat;
-  cursor: pointer;
-  border: none;
-`;
-
-const GlobeIcon = styled.button`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-  margin: 0 10px;
-  padding: 0;
-  width: 40px;
-  height: 40px;
-  border-radius: 60px;
-  border: none;
-  background-size: 20px;
-  background-image: url(${Globe});
-  background-position: center;
-  background-repeat: no-repeat;
-  background-color: transparent;
-
-  :hover {
-    background-color: #ebebeb;
-  }
-`;
-
 const SearchBarWrapper = styled.section`
-  //position: fixed;
-  //left: 0;
-  //right: 0;
+  position: fixed;
+  top: 0;
   width: 100%;
   height: 80px;
-  padding: 12px 40px;
+  padding: 12px 20px;
   background: #ffffff;
   box-sizing: border-box;
   box-shadow: 0 9px 16px -7px rgba(0, 0, 0, 0.1);
   z-index: 900;
 
   @media screen and (min-width: ${NARROW_DESKTOP}) {
+    padding: 12px 40px;
     box-shadow: none;
     border-bottom: 1px solid #dddddd;
   }
-
-  @media screen and (max-width: ${MOBILE}) {
-    padding: 12px 20px;
-  }
 `;
 
-const DesktopWrapper = styled.div`
+const MobileWrapper = styled.div`
   display: flex;
   justify-content: space-between;
-  width: 100%;
+  align-items: center;
   height: 100%;
+  padding: 8px 12px;
+  box-sizing: border-box;
+  border-radius: 36px;
+  background: #f7f7f7;
 
-  div {
+  div.left-side {
     display: flex;
-    flex-direction: row;
     align-items: center;
   }
-`;
 
-const SearchBarDesktop = styled.button`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 350px;
-  height: 50px;
-  margin-left: 28px;
-  background: none;
-  border: 1px solid #dddddd;
-  border-radius: 40px;
-  padding: 8px 10px;
-  box-sizing: border-box;
-  box-shadow: 0 0 20px -4px rgba(0, 0, 0, 0.1);
-  font-size: 14px;
-  font-weight: 600;
-  color: #111111;
-  cursor: pointer;
-
-  :hover {
-    box-shadow: none;
-  }
-
-  div {
-    display: flex;
-    justify-content: space-evenly;
-    width: 100%;
-
-    span {
-      position: relative;
-      padding-right: 20px;
-
-      &::after {
-        position: absolute;
-        display: block;
-        margin-right: 6px;
-        width: 1px;
-        height: 22px;
-        top: -2px;
-        right: 0;
-        background: #dddddd;
-        content: "";
-      }
-
-      &:last-child::after {
-        display: none;
-      }
-    }
-  }
-`;
-
-const SearchBarDesktopIcon = styled.div`
-  max-width: 32px;
-  height: 32px;
-  border-radius: 40px;
-  background-color: #ff385c;
-  background-image: url(${SearchIcon});
-  background-size: 16px;
-  background-position: center;
-  background-repeat: no-repeat;
-`;
-
-const LogoWrapper = styled.a`
-  width: 40px;
-  height: 40px;
-  background-size: 40px;
-  background-color: transparent;
-  background-image: url(${Logo});
-  background-position: center;
-  background-repeat: no-repeat;
-`;
-
-const TouchAreaWrapper = styled.a`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  height: 100%;
-  border-radius: 36px;
-  padding: 0 12px;
-  background: #f7f7f7;
-  box-sizing: border-box;
-  cursor: pointer;
-`;
-
-const LeftSide = styled.div`
-  display: flex;
-  align-items: center;
-
-  button {
+  button.back-button {
     width: 24px;
     height: 24px;
     margin-right: 12px;
     padding: 0;
-    background: url(${BackArrow}) 0 0 no-repeat;
-    background-size: contain;
+    background: transparent url(${BackArrow}) center / 100% no-repeat;
     border: none;
+    cursor: pointer;
+  }
+
+  button.search-button {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 0;
+    border: none;
+    background: none;
+    cursor: pointer;
+    text-align: left;
+
+    span.location {
+      display: block;
+      margin-bottom: 4px;
+      width: 100%;
+      font-size: 15px;
+      font-weight: 700;
+      color: #111111;
+    }
+
+    span.sub-content {
+      font-size: 12px;
+      font-weight: 500;
+      color: #333333;
+    }
+  }
+
+  button.filter-button {
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    border: 1px solid #dddddd;
+    border-radius: 42px;
+    background: transparent url(${FilterIcon}) center/ 20px 20px no-repeat;
+    cursor: pointer;
+  }
+
+  @media screen and (min-width: ${NARROW_DESKTOP}) {
+    display: none;
   }
 `;
 
-const SearchContent = styled.div`
-  display: flex;
-  flex-direction: column;
-  padding: 0;
-`;
+const DesktopWrapper = styled.div`
+  display: none;
 
-const LocationLabel = styled.span`
-  display: block;
-  margin-bottom: 4px;
-  width: 100%;
-  font-size: 15px;
-  font-weight: 700;
-  color: #111111;
+  @media screen and (min-width: ${NARROW_DESKTOP}) {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    height: 100%;
 
-  + span {
-    font-size: 12px;
-    color: #333333;
-  }
-`;
+    div {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
 
-const FilterButton = styled.button`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 40px;
-  height: 40px;
-  padding: 0;
-  border: 1px solid #dddddd;
-  border-radius: 42px;
-  background: none;
-  cursor: pointer;
+      button.logo-wrapper {
+        width: 40px;
+        height: 40px;
+        background: transparent url(${Logo}) center / 100% no-repeat;
+        border: none;
+      }
 
-  div {
-    width: 20px;
-    height: 20px;
-    background-color: transparent;
-    background-image: url(${FilterIcon});
-    background-size: contain;
-    background-repeat: no-repeat;
+      button.desktop-search-bar-wrapper {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 350px;
+        height: 50px;
+        margin-left: 28px;
+        padding: 8px 20px;
+        background: none;
+        border: 1px solid #dddddd;
+        border-radius: 40px;
+        box-sizing: border-box;
+        box-shadow: 0 0 20px -4px rgba(0, 0, 0, 0.1);
+        font-size: 14px;
+        font-weight: 600;
+        color: #111111;
+        cursor: pointer;
+
+        :hover {
+          box-shadow: none;
+        }
+
+        div {
+          display: flex;
+          gap: 20px;
+          width: 100%;
+          margin-right: 24px;
+
+          span {
+            position: relative;
+
+            &::after {
+              position: absolute;
+              top: -3px;
+              right: 0;
+              display: block;
+              width: 1px;
+              height: 22px;
+              margin-right: -10px;
+              background: #dddddd;
+              content: "";
+            }
+
+            &:last-child::after {
+              display: none;
+            }
+          }
+        }
+        div.search-button {
+          max-width: 32px;
+          height: 32px;
+          margin-right: 0;
+          border-radius: 40px;
+          background: #ff385c url(${SearchIcon}) center / 16px no-repeat;
+        }
+      }
+
+      a.host-button {
+        padding: 10px;
+        border-radius: 40px;
+        background: none;
+        font-size: 14px;
+        font-weight: 600;
+        color: #111111;
+        text-decoration-line: none;
+        cursor: pointer;
+
+        :hover {
+          background: #ebebeb;
+        }
+      }
+
+      button.globe-button {
+        width: 40px;
+        height: 40px;
+        margin: 0 18px 0 8px;
+        padding: 0 10px;
+        border-radius: 60px;
+        border: none;
+        background: transparent url(${Globe}) center / 20px no-repeat;
+        cursor: pointer;
+
+        :hover {
+          background-color: #ebebeb;
+        }
+      }
+
+      div.hamburger-wrapper {
+        padding: 4px;
+        border-radius: 24px;
+        border: 1px solid #dddddd;
+
+        button.menu-icon-button {
+          margin-left: 8px;
+          width: 20px;
+          height: 20px;
+          background: transparent url(${MenuIcon}) center / 100% no-repeat;
+          border: none;
+          cursor: pointer;
+        }
+
+        button.user-icon-button {
+          margin-left: 12px;
+          width: 32px;
+          height: 32px;
+          background: transparent url(${UserIcon}) center / 100% no-repeat;
+          border: none;
+          cursor: pointer;
+        }
+      }
+    }
   }
 `;

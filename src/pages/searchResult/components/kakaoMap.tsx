@@ -19,7 +19,7 @@ export default function KakaoMap({ isContentOpen }: Props) {
   });
 
   return (
-    <Container>
+    <Container isContentOpen={isContentOpen}>
       {!isContentOpen && isNarrowDesktop && (
         <button>
           <div />
@@ -72,9 +72,9 @@ const ItemWrapper = styled.div`
   padding: 24px;
 `;
 
-const Container = styled.div`
+const Container = styled.div<{ isContentOpen: boolean }>`
   position: relative;
-  display: flex;
+  display: ${(props) => (!props.isContentOpen ? "flex" : "none")};
   justify-content: center;
   width: 100%;
   height: 100%;

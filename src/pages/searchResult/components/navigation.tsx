@@ -8,66 +8,55 @@ export default function Navigation() {
   return (
     <NavigationWrapper>
       <section>
-        <button>
-          <MenuIconWrapper icon={SearchIcon} />
-          <span style={{ color: "#111111" }}>둘러보기</span>
-        </button>
-        <button>
-          <MenuIconWrapper icon={HeartIcon} />
-          <span>위시리스트</span>
-        </button>
-        <button>
-          <MenuIconWrapper icon={UserIcon} />
-          <span>로그인</span>
-        </button>
+        <MenuWrapper icon={SearchIcon}>둘러보기</MenuWrapper>
+        <MenuWrapper icon={HeartIcon}>위시리스트</MenuWrapper>
+        <MenuWrapper icon={UserIcon}>로그인</MenuWrapper>
       </section>
     </NavigationWrapper>
   );
 }
 
 const NavigationWrapper = styled.nav`
-  @media screen and (min-width: ${NARROW_DESKTOP}) {
-    display: none;
-  }
-
-  display: table-row;
+  position: fixed;
+  bottom: 0;
   width: 100%;
   height: 66px;
   border-top: 1px solid #eeeeee;
+  box-sizing: border-box;
   background: #ffffff;
-  z-index: 899;
+  z-index: 900;
 
   section {
     display: flex;
     justify-content: center;
     align-items: center;
+    gap: 12px;
     height: 100%;
     text-align: center;
+  }
 
-    button {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      width: 70px;
-      background: none;
-      border: none;
-      cursor: pointer;
-
-      span {
-        font-size: 11px;
-        font-weight: 500;
-        color: #888888;
-      }
-    }
+  @media screen and (min-width: ${NARROW_DESKTOP}) {
+    display: none;
   }
 `;
 
-const MenuIconWrapper = styled.div<{ icon: string }>`
-  margin: 0 0 6px 0;
-  width: 24px;
-  height: 24px;
-  background-color: transparent;
-  background-image: url(${(props) => props.icon});
-  background-size: contain;
-  background-repeat: no-repeat;
+const MenuWrapper = styled.button<{ icon: string }>`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 70px;
+  height: 60px;
+  padding-top: 34px;
+  background: transparent url(${(props) => props.icon}) center top 4px / 24px
+    no-repeat;
+  border: none;
+  font-size: 12px;
+  font-weight: 500;
+  color: #888888;
+  text-align: center;
+  cursor: pointer;
+
+  :active {
+    color: #111111;
+  }
 `;
