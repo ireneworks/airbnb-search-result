@@ -1,49 +1,41 @@
 import SearchIcon from "../assets/bx-search.svg";
 import HeartIcon from "../assets/bx-heart.svg";
 import UserIcon from "../assets/bx-user-circle.svg";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
+import { NARROW_DESKTOP } from "../styles/devices";
 
 export default function Navigation() {
   return (
-    <NavigationWrapper isOpen={true}>
+    <NavigationWrapper>
       <section>
-        <a>
+        <button>
           <MenuIconWrapper icon={SearchIcon} />
           <span style={{ color: "#111111" }}>둘러보기</span>
-        </a>
-        <a>
+        </button>
+        <button>
           <MenuIconWrapper icon={HeartIcon} />
           <span>위시리스트</span>
-        </a>
-        <a>
+        </button>
+        <button>
           <MenuIconWrapper icon={UserIcon} />
           <span>로그인</span>
-        </a>
+        </button>
       </section>
     </NavigationWrapper>
   );
 }
 
-const NavigationWrapper = styled.nav<{ isOpen: boolean }>`
-  @media screen and (min-width: 746px) {
+const NavigationWrapper = styled.nav`
+  @media screen and (min-width: ${NARROW_DESKTOP}) {
     display: none;
   }
 
-  ${(props) => {
-    if (!props.isOpen) {
-      return css`
-        display: none;
-      `;
-    }
-  }}
-  position: fixed;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  display: table-row;
+  width: 100%;
   height: 66px;
   border-top: 1px solid #eeeeee;
   background: #ffffff;
-  z-index: 50;
+  z-index: 899;
 
   section {
     display: flex;
@@ -52,11 +44,13 @@ const NavigationWrapper = styled.nav<{ isOpen: boolean }>`
     height: 100%;
     text-align: center;
 
-    a {
+    button {
       display: flex;
       flex-direction: column;
       align-items: center;
       width: 70px;
+      background: none;
+      border: none;
       cursor: pointer;
 
       span {

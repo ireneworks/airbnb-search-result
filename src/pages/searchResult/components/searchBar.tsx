@@ -121,9 +121,10 @@ const GlobeIcon = styled.button`
 `;
 
 const SearchBarWrapper = styled.section`
-  position: fixed;
-  left: 0;
-  right: 0;
+  //position: fixed;
+  //left: 0;
+  //right: 0;
+  width: 100%;
   height: 80px;
   padding: 12px 40px;
   background: #ffffff;
@@ -246,10 +247,8 @@ const LeftSide = styled.div`
     height: 24px;
     margin-right: 12px;
     padding: 0;
-    background-color: transparent;
-    background-image: url(${BackArrow});
+    background: url(${BackArrow}) 0 0 no-repeat;
     background-size: contain;
-    background-repeat: no-repeat;
     border: none;
   }
 `;

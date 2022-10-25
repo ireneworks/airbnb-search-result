@@ -3,9 +3,11 @@ import { useMediaQuery } from "react-responsive";
 import FilterIcon from "../assets/bx-slider-alt.svg";
 import Image from "../assets/89cafda9-71a9-42ec-b88e-64e7f2987672.jpeg";
 import StarIcon from "../assets/bxs-star.svg";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import HeartIcon from "../assets/bx-heart-white.svg";
 import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 import { MOBILE, NARROW_DESKTOP } from "../styles/devices";
 
 interface Props {
@@ -17,9 +19,11 @@ export default function ContentList({ isOpen }: Props) {
   const isNarrowDesktop = useMediaQuery({
     query: `(min-width: ${NARROW_DESKTOP})`,
   });
+  const test = useRef<HTMLDivElement>(null);
 
   const [scroll, setScroll] = useState(false);
   const handleScroll = () => {
+    console.log(test.current?.scrollTop);
     if (window.scrollY >= 10) {
       return setScroll(true);
     }
@@ -42,22 +46,44 @@ export default function ContentList({ isOpen }: Props) {
   };
 
   return (
-    <Container isOpen={isOpen}>
-      {isMobile && (
-        <HeaderWrapper>
-          <Handler />
-        </HeaderWrapper>
-      )}
-      {isNarrowDesktop && (
-        <TopWrapper scroll={scroll}>
-          <p>숙소 1,000개 이상</p>
-          <button>
-            <div />
-            필터
-          </button>
-        </TopWrapper>
-      )}
+    <Container ref={test} isOpen={isOpen}>
+      <HeaderWrapper>
+        <Handler />
+      </HeaderWrapper>
+      {/*{isNarrowDesktop && (*/}
+      {/*  <TopWrapper scroll={scroll}>*/}
+      {/*    <p>숙소 1,000개 이상</p>*/}
+      {/*    <button>*/}
+      {/*      <div />*/}
+      {/*      필터*/}
+      {/*    </button>*/}
+      {/*  </TopWrapper>*/}
+      {/*)}*/}
       <Content>
+        <a href="#">
+          <ImageWrapper>
+            <span>슈퍼호스트</span>
+            <div>
+              <SliderWrapper {...settings}>
+                <img src={Image} />
+                <img src={Image} />
+              </SliderWrapper>
+            </div>
+            <button />
+          </ImageWrapper>
+          <ItemHeaderWrapper>
+            <dt>Seocho 4(sa)-dong</dt>
+            <RatingWrapper>
+              <div />
+              <span>4.71 (100)</span>
+            </RatingWrapper>
+          </ItemHeaderWrapper>
+          <dd>강남역 8분거리/포근/ 장기출장/ 깨끗해요/맛집/...</dd>
+          <dd>퀸 침대 1개</dd>
+          <p>
+            ₩98,902 /박 ꞏ <span>총액 ₩296,706</span>
+          </p>
+        </a>
         <a href="#">
           <ImageWrapper>
             <span>슈퍼호스트</span>
@@ -176,12 +202,12 @@ const ImageWrapper = styled.div`
   width: 100%;
   margin-top: 0;
   border-radius: 16px;
-  background: green;
+  //background: green;
 
   div {
-    display: flex;
-    justify-content: center;
-    overflow: hidden;
+    //display: flex;
+    //justify-content: center;
+    //overflow: hidden;
     margin-bottom: 12px;
   }
 
@@ -212,7 +238,7 @@ const ImageWrapper = styled.div`
     cursor: pointer;
   }
 `;
-
+//flex-wrap
 const ItemHeaderWrapper = styled.div`
   display: flex;
   justify-content: space-between;
@@ -220,9 +246,13 @@ const ItemHeaderWrapper = styled.div`
   margin-bottom: 12px;
 
   dt {
-    display: inline;
+    display: block;
     font-size: 15px;
     font-weight: 600;
+    overflow: hidden;
+    word-break: break-all;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 `;
 
@@ -250,24 +280,30 @@ const RatingWrapper = styled.div`
 `;
 
 const Content = styled.div`
-  @media screen and (min-width: ${NARROW_DESKTOP}) {
-    margin: 100px 26px 60px;
-  }
-  margin: 24px 26px 100px;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;
+  width: 100%;
+  height: auto;
+  margin: 24px 26px 100px;
+
+  @media screen and (min-width: ${NARROW_DESKTOP}) {
+    flex-wrap: nowrap;
+    margin: 100px 26px 60px;
+  }
 
   a {
-    @media screen and (min-width: ${NARROW_DESKTOP}) {
-      flex: 1 1 40%;
-    }
     flex: 1 100%;
-    margin: 0 14px 36px;
     width: 100%;
-    cursor: pointer;
+    margin: 0 14px 36px;
     text-decoration-line: none;
     color: #111111;
+    cursor: pointer;
+
+    @media screen and (min-width: ${NARROW_DESKTOP}) {
+      flex: 1 1 50%;
+      width: 50%;
+    }
 
     dd {
       margin: 0 0 2px 0;
@@ -344,23 +380,15 @@ const TopWrapper = styled.div<{ scroll: boolean }>`
 `;
 
 const Container = styled.div<{ isOpen: boolean }>`
-  ${(props) => {
-    if (props.isOpen) {
-      return css`
-        display: flex;
-      `;
-    }
-    return css`
-      display: none;
-    `;
-  }}
+  display: flex;
   flex-direction: column;
-  position: fixed;
-  z-index: 2;
-  top: 80px;
-  left: 0;
-  right: 0;
-  overflow-x: hidden;
+  //position: fixed;
+  //top: 80px;
+  //left: 0;
+  //right: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
 
   @media screen and (min-width: ${NARROW_DESKTOP}) {
     border-radius: 0;
@@ -368,9 +396,8 @@ const Container = styled.div<{ isOpen: boolean }>`
 
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
-  background-color: #ffffff;
+  background-color: red;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
-  height: ${window.innerHeight - 40}px;
 `;
 
 const HeaderWrapper = styled.div`
