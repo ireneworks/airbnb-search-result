@@ -151,6 +151,7 @@ const DesktopWrapper = styled.div`
         height: 40px;
         background: transparent url(${Logo}) center / 100% no-repeat;
         border: none;
+        cursor: pointer;
       }
 
       button.desktop-search-bar-wrapper {

@@ -32,10 +32,12 @@ const Container = styled.button<{ isContentOpen: boolean }>`
   justify-content: center;
   align-items: center;
   position: fixed;
-  bottom: 25px;
+  left: 50%;
+  bottom: 12px;
   width: auto;
   height: 45px;
   padding: 0 18px;
+  transform: translate(-50%, -50%);
   background: #111111
     url(${(props) => (props.isContentOpen ? MapIcon : ListIcon)}) right 16px
     bottom 13px / 20px no-repeat;

@@ -32,6 +32,7 @@ const Container = styled.main`
 
   div.content-wrapper {
     margin-top: 80px;
+    width: 100%;
     height: 100%;
     background: #ffffff;
     overflow-x: hidden;

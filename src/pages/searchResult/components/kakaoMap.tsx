@@ -1,31 +1,23 @@
 import React, { useState } from "react";
 import { CustomOverlayMap, Map } from "react-kakao-maps-sdk";
-import Item from "./item";
+import MobilePinItem from "./mobilePinItem";
 import styled from "styled-components";
 import FilterIcon from "../assets/bx-slider-alt.svg";
-import { useMediaQuery } from "react-responsive";
 import { NARROW_DESKTOP } from "../styles/devices";
+import DesktopPinItem from "./desktopPinItem";
 
 interface Props {
   isContentOpen: boolean;
 }
 
 export default function KakaoMap({ isContentOpen }: Props) {
-  const [open, setOpen] = useState(false);
+  const [locationPinOpen, setLocationPinOpen] = useState(false);
   const [level, setLevel] = useState(3);
-  const setStyle = open ? clickedPin : unClickedPin;
-  const isNarrowDesktop = useMediaQuery({
-    query: `(min-width: ${NARROW_DESKTOP})`,
-  });
+  const setPinStyle = locationPinOpen ? clickedPin : unClickedPin;
 
   return (
     <Container isContentOpen={isContentOpen}>
-      {!isContentOpen && isNarrowDesktop && (
-        <button>
-          <div />
-          <span>필터</span>
-        </button>
-      )}
+        <button className='filter-button'>필터</button>
       <Map
         center={{ lat: 37.500001, lng: 127.02612 }}
         level={level}
@@ -35,129 +27,100 @@ export default function KakaoMap({ isContentOpen }: Props) {
           bottom: "0",
           left: "0",
           right: "0",
+          //   width: "100%",
+          //   height: "100%",
         }}
       >
-        {!isContentOpen && isNarrowDesktop && (
           <div className="change-level">
+              <button className="up-button" onClick={() => setLevel(level - 1)}>
+                  +
+              </button>
             <button className="down-button" onClick={() => setLevel(level + 1)}>
-              -
-            </button>
-            <button className="up-button" onClick={() => setLevel(level - 1)}>
-              +
+                -
             </button>
           </div>
-        )}
-        {overlayPins.map((pin) => (
+        {locationPins.map((pin) => (
           <CustomOverlayMap position={pin.position}>
-            <div style={setStyle} onClick={() => setOpen(!open)}>
+            <div style={setPinStyle} onClick={() => setLocationPinOpen(!locationPinOpen)}>
               {pin.price}
             </div>
-            {open && isNarrowDesktop && (
-              <ItemWrapper onClick={() => setOpen(!open)}>열기</ItemWrapper>
-            )}
+            {locationPinOpen && <DesktopPinItem isPinOpen={locationPinOpen} setPinOpen={setLocationPinOpen} /> }
           </CustomOverlayMap>
         ))}
       </Map>
-      {open && <Item isOpen={open} setOpen={setOpen} />}
+      {locationPinOpen && <MobilePinItem isOpen={locationPinOpen} setOpen={setLocationPinOpen} />}
     </Container>
   );
 }
 
-const ItemWrapper = styled.div`
-  width: 300px;
-  position: absolute;
-  top: 32px;
-  background: #ffffff;
-  border-radius: 12px;
-  padding: 24px;
-`;
-
 const Container = styled.div<{ isContentOpen: boolean }>`
-  position: relative;
   display: ${(props) => (!props.isContentOpen ? "flex" : "none")};
   justify-content: center;
-  width: 100%;
-  height: 100%;
 
-  .change-level {
-    position: absolute;
-    top: 0;
-    right: 80px;
-    display: flex;
-    flex-direction: row;
-
-    button.down-button {
-      margin-top: 40px;
-      padding: 8px 15px;
-      background: #ffffff;
-      font-size: 24px;
-      font-weight: 700;
-      line-height: 24px;
-      color: #111111;
-      border-top-left-radius: 0;
-      border-top-right-radius: 0;
-      border-bottom-left-radius: 5px;
-      border-bottom-right-radius: 5px;
-      border-top: 1px solid #eeeeee;
-    }
-
-    button.up-button {
-      background: #ffffff;
-      font-size: 24px;
-      font-weight: 700;
-      line-height: 24px;
-      color: #111111;
-      padding: 8px 12px;
-      border-top-left-radius: 5px;
-      border-top-right-radius: 5px;
-      border-bottom-left-radius: 0;
-      border-bottom-right-radius: 0;
-    }
-  }
-
-  button {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: absolute;
-    top: 100px;
-    left: 24px;
-    border: none;
-    background: #ffffff;
-    padding: 8px 12px;
-    z-index: 2;
-    cursor: pointer;
-    border-radius: 6px;
-
-    div {
-      width: 20px;
-      height: 20px;
-      background-color: transparent;
-      background-image: url(${FilterIcon});
-      background-size: contain;
-      background-repeat: no-repeat;
-      margin-right: 8px;
-    }
-
-    span {
-      font-size: 15px;
+  button.filter-button {
+    display: none;
+    
+    @media screen and (min-width: ${NARROW_DESKTOP}) {
+      position: absolute;
+      top: 24px;
+      left: 24px;
+      border: none;
+      padding: 8px 12px 8px 36px;
+      border-radius: 6px;
+      background: #ffffff url(${FilterIcon}) left 12px bottom 6px / 20px no-repeat;
       font-weight: 600;
       color: #111111;
+      z-index: 52;
+      cursor: pointer;
     }
   }
-`;
+  
+  div.change-level {
+    display: none;
+    
+    @media screen and (min-width: ${NARROW_DESKTOP}) {
+      position: absolute;
+      top: 24px;
+      right: 24px;
+      display: flex;
+      flex-direction: column;
+      z-index: 5;
 
-const overlayPins = [
-  { position: { lat: 37.50115, lng: 127.02501 }, price: "₩158,100" },
-  { position: { lat: 37.50085, lng: 127.02549 }, price: "₩112,500" },
-  { position: { lat: 37.50096, lng: 127.02719 }, price: "₩94,300" },
-  { position: { lat: 37.50051, lng: 127.02692 }, price: " ₩130,800" },
-];
+      button.up-button {
+        padding: 8px 12px;
+        background: #ffffff;
+        border:none;
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
+        font-size: 24px;
+        font-weight: 600;
+        line-height: 24px;
+        color: #555555;
+      }
+
+      button.down-button {
+        padding: 8px 15px;
+        background: #ffffff;
+        font-size: 24px;
+        font-weight: 700;
+        line-height: 24px;
+        color: #555555;
+        border-bottom-left-radius: 5px;
+        border-bottom-right-radius: 5px;
+        border-top: 1px solid #dddddd;
+        border-left: none;
+        border-right: none;
+        border-bottom: none;
+      }
+    }
+  }
+  
+`;
 
 const unClickedPin = {
   padding: "6px 10px",
-  backgroundColor: "#fff",
-  color: "#000",
+  backgroundColor: "#ffffff",
+  color: "#000000",
   borderRadius: "40px",
   fontSize: "13px",
   fontWeight: "700",
@@ -175,3 +138,10 @@ const clickedPin = {
   boxShadow: "0 9px 16px -7px rgba(0, 0, 0, 0.3)",
   cursor: "pointer",
 };
+
+const locationPins = [
+    { position: { lat: 37.50115, lng: 127.02501 }, price: "₩158,100" },
+    { position: { lat: 37.50085, lng: 127.02549 }, price: "₩112,500" },
+    { position: { lat: 37.50096, lng: 127.02719 }, price: "₩94,300" },
+    { position: { lat: 37.50051, lng: 127.02692 }, price: " ₩130,800" },
+];

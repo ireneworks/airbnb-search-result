@@ -169,15 +169,14 @@ const Container = styled.div<{ isContentOpen: boolean }>`
 
 const Content = styled.div`
   display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
+  flex-flow: row wrap;
   width: auto;
   margin: 0 20px 100px 20px;
 
   @media screen and (min-width: ${NARROW_DESKTOP}) {
     flex-wrap: nowrap;
     gap: 24px;
-    margin: 100px 26px 60px;
+    margin: 100px 40px 60px;
   }
 
   a {
@@ -254,6 +253,7 @@ const ImageWrapper = styled.div`
     top: 16px;
     right: 16px;
     margin: 0;
+    padding: 0;
     width: 28px;
     height: 28px;
     border: none;
