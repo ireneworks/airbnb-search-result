@@ -34,7 +34,7 @@ export default function SearchBar() {
           </button>
         </div>
         <div>
-          <a className="host-button" href="#">
+          <a className="host-button" href="#" target='_blank' rel='noreferrer'>
             호스트 되기
           </a>
           <button className="globe-button" />

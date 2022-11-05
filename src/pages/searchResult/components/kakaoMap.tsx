@@ -17,20 +17,15 @@ export default function KakaoMap({ isContentOpen }: Props) {
 
   return (
     <Container isContentOpen={isContentOpen}>
-        <button className='filter-button'>필터</button>
       <Map
         center={{ lat: 37.500001, lng: 127.02612 }}
         level={level}
         style={{
-          position: "fixed",
-          top: "0",
-          bottom: "0",
-          left: "0",
-          right: "0",
-          //   width: "100%",
-          //   height: "100%",
+            width: "100%",
+            height: "100%",
         }}
       >
+          <button className='filter-button'>필터</button>
           <div className="change-level">
               <button className="up-button" onClick={() => setLevel(level - 1)}>
                   +
@@ -56,7 +51,8 @@ export default function KakaoMap({ isContentOpen }: Props) {
 const Container = styled.div<{ isContentOpen: boolean }>`
   display: ${(props) => (!props.isContentOpen ? "flex" : "none")};
   justify-content: center;
-
+  height: 100%;
+  
   button.filter-button {
     display: none;
     
@@ -70,7 +66,7 @@ const Container = styled.div<{ isContentOpen: boolean }>`
       background: #ffffff url(${FilterIcon}) left 12px bottom 6px / 20px no-repeat;
       font-weight: 600;
       color: #111111;
-      z-index: 52;
+      z-index: 5;
       cursor: pointer;
     }
   }
@@ -96,6 +92,7 @@ const Container = styled.div<{ isContentOpen: boolean }>`
         font-weight: 600;
         line-height: 24px;
         color: #555555;
+        cursor: pointer;
       }
 
       button.down-button {
@@ -111,6 +108,7 @@ const Container = styled.div<{ isContentOpen: boolean }>`
         border-left: none;
         border-right: none;
         border-bottom: none;
+        cursor: pointer;
       }
     }
   }

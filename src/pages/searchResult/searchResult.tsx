@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { useState } from "react";
 import ContentList from "./components/contentList";
 import KakaoMap from "./components/kakaoMap";
-import SwitchButton from "./components/switchButton";
+import SwitchListToMapButton from "./components/switchListToMapButton";
 
 export default function SearchResult() {
   const [isContentOpen, setContentOpen] = useState(true);
@@ -12,7 +12,7 @@ export default function SearchResult() {
   return (
     <Container>
       <SearchBar />
-      <SwitchButton
+      <SwitchListToMapButton
         isContentOpen={isContentOpen}
         setContentOpen={setContentOpen}
       />

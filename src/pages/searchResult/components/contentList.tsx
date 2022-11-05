@@ -51,12 +51,12 @@ export default function ContentList({ isContentOpen }: Props) {
         </button>
       </DesktopHeaderWrapper>
       <Content>
-        <a href="#">
+        <a href="#" target='_blank' rel='noreferrer'>
           <ImageWrapper>
             <span>슈퍼호스트</span>
             <Slider {...settings}>
-              <img src={Image} />
-              <img src={Image} />
+              <img src={Image} alt='숙소 사진'/>
+              <img src={Image} alt='숙소 사진'/>
             </Slider>
             <button />
           </ImageWrapper>
@@ -70,12 +70,12 @@ export default function ContentList({ isContentOpen }: Props) {
             ₩98,902 /박 · <span>총액 ₩296,706</span>
           </p>
         </a>
-        <a href="#">
+        <a href="#" target='_blank' rel='noreferrer'>
           <ImageWrapper>
             <span>슈퍼호스트</span>
             <Slider {...settings}>
-              <img src={Image} />
-              <img src={Image} />
+              <img src={Image} alt='숙소 사진'/>
+              <img src={Image} alt='숙소 사진'/>
             </Slider>
             <button />
           </ImageWrapper>
@@ -89,12 +89,12 @@ export default function ContentList({ isContentOpen }: Props) {
             ₩98,902 /박 · <span>총액 ₩296,706</span>
           </p>
         </a>
-        <a href="#">
+        <a href="#" target='_blank' rel='noreferrer'>
           <ImageWrapper>
             <span>슈퍼호스트</span>
             <Slider {...settings}>
-              <img src={Image} />
-              <img src={Image} />
+              <img src={Image} alt='숙소 사진'/>
+              <img src={Image} alt='숙소 사진'/>
             </Slider>
             <button />
           </ImageWrapper>
@@ -108,12 +108,12 @@ export default function ContentList({ isContentOpen }: Props) {
             ₩98,902 /박 · <span>총액 ₩296,706</span>
           </p>
         </a>
-        <a href="#">
+        <a href="#" target='_blank' rel='noreferrer'>
           <ImageWrapper>
             <span>슈퍼호스트</span>
             <Slider {...settings}>
-              <img src={Image} />
-              <img src={Image} />
+              <img src={Image} alt='숙소 사진'/>
+              <img src={Image} alt='숙소 사진'/>
             </Slider>
             <button />
           </ImageWrapper>
@@ -169,14 +169,13 @@ const Container = styled.div<{ isContentOpen: boolean }>`
 
 const Content = styled.div`
   display: flex;
-  flex-flow: row wrap;
-  width: auto;
+  flex-wrap: wrap;
   margin: 0 20px 100px 20px;
 
   @media screen and (min-width: ${NARROW_DESKTOP}) {
-    flex-wrap: nowrap;
-    gap: 24px;
+    flex-wrap: wrap;
     margin: 100px 40px 60px;
+    justify-content: space-between;
   }
 
   a {
@@ -188,8 +187,8 @@ const Content = styled.div`
     cursor: pointer;
 
     @media screen and (min-width: ${NARROW_DESKTOP}) {
-      flex: 1 1 50%;
-      width: 50%;
+      flex: 0 1 49%;
+      width: 49%;
     }
 
     p {

@@ -16,7 +16,7 @@ export default function MobilePinItem({ isOpen, setOpen }: Props) {
   return (
         <ItemWrapper>
           <div className='image-wrapper'>
-            <img src={House} />
+            <img src={House} alt='숙소 사진'/>
             <button className="close-button" onClick={() => setOpen(!isOpen)} />
           </div>
           <section>
@@ -47,7 +47,8 @@ const ItemWrapper = styled.button`
   border-radius: 12px;
   border: none;
   text-decoration-line: none;
-
+  z-index: 5;
+  
   div.image-wrapper {
     position: relative;
     width: 100%;

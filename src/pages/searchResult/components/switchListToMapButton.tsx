@@ -8,7 +8,7 @@ interface Props {
   setContentOpen(value: boolean): void;
 }
 
-export default function SwitchButton({ isContentOpen, setContentOpen }: Props) {
+export default function SwitchListToMapButton({ isContentOpen, setContentOpen }: Props) {
   return (
     <Container
       isContentOpen={isContentOpen}
