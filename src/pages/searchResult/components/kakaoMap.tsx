@@ -34,8 +34,8 @@ export default function KakaoMap({ isContentOpen }: Props) {
                 -
             </button>
           </div>
-        {locationPins.map((pin) => (
-          <CustomOverlayMap position={pin.position}>
+        {locationPins.map((pin, index) => (
+          <CustomOverlayMap position={pin.position} key={index}>
             <div style={setPinStyle} onClick={() => setLocationPinOpen(!locationPinOpen)}>
               {pin.price}
             </div>
